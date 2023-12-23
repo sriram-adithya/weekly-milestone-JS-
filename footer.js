@@ -12,7 +12,6 @@ footer.appendChild(footerMain);
 const footerBottom = document.createElement("div");
 footerBottom.classList.add("footerBottom");
 footer.appendChild(footerBottom);
-
 //Column loop 
 footerJson.colunms.forEach(colunmItem =>{
     const title = colunmItem.title;
@@ -64,7 +63,9 @@ footerJson.bottomColunms.forEach(bottomItem =>{
     footerMenu.classList.add("footerMenu");
     //append to main footer div
     footerBottom.appendChild(footerMenu);
-    if(img && img.trim() !==""){
+
+    if(img && img.trim()!=""){
+
     //img tag to render bottom images
     const image =document.createElement("img");
     image.src = img;
