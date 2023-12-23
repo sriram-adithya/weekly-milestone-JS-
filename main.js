@@ -204,6 +204,9 @@ addToCompareCheckbox.type = 'checkbox';
 addToCompareCheckbox.id = 'addToCompareCheckbox'; 
 addToCompareCheckbox.style.cursor="pointer";
 addToCompare.appendChild(addToCompareCheckbox);
+addToCompareCheckbox.addEventListener("click",function(event){
+  alert("placeHolder");
+})
 
 //label tag for addToCompare
 const addToCompareLabel = document.createElement('label');
