@@ -10,6 +10,7 @@ nav{
     justify-content: center;
     align-items: center;
     padding: 10px 0px;
+    position: relative;
 }
 .plus-color{
     color: orange;
@@ -150,8 +151,8 @@ input[type='checkbox'] {
     gap: 100px;
 }
 h4{
-padding-bottom: 10px;
-color: gray;
+    padding-bottom: 10px;
+    color: gray;
 }
 .rightDiv{
     color: white;
@@ -181,8 +182,7 @@ border-left: 1px solid #474D5D;
 height: 140px;
 font-size: 12px;
 font-weight: 500;
-line-height: 18px; 
-  /* width: 435px; */
+line-height: 18px;
 width: 235px;
 }
 .footer-column:nth-child(6) {
@@ -197,13 +197,39 @@ width: 212px;
     flex-direction: row;
     gap: 80px;
     border-top: 1px solid #454d5e ;
-    padding: 25px 0px 25px 44px;
+    padding: 25px 0px 25px 0;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .footerBottom .footerMenu a{
-    margin-left: 8px;
+    margin-left: 10px;
     text-decoration: none;
     color: white;
-  }
+}
+
+/* compareButton */
+.compareButton{
+    padding: 10px 30px 10px;
+}
+/* Media queries to make Responsive */
+@media (max-width:1366px){
+    nav{
+        padding: 12px; /* Adjusted for responsiveness */
+        align-items: center;
+    }
+    .footerMain{
+        gap: 10px;
+        display: flex;
+    }
+    .footerBottom{
+        padding-left: 70px;
+        padding-right: 80px;
+        gap: 10px;
+    }
+    .footer-column{
+        margin-left: 50px;
+    }
+}
+
 
