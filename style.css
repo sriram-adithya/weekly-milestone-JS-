@@ -148,7 +148,7 @@ input[type='checkbox'] {
 .footerMain{
     display: flex;
     padding: 40px 78px 70px 65px;
-    gap: 100px;
+    gap: 140px;
 }
 h4{
     padding-bottom: 10px;
@@ -208,9 +208,59 @@ width: 212px;
     color: white;
 }
 
-/* compareButton */
+/* Compare button  */
 .compareButton{
-    padding: 10px 30px 10px;
+    display: none;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    background-color: #2874f0;
+    color: white;
+    position: fixed;
+    z-index:2 ;
+    bottom: 20px;
+    right: 28px;
+    margin-right: 20px;
+    cursor: pointer;
+    height: 40px;
+    width: 144px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.compareButton.show{
+    display: block;
+}
+.product-cards{
+    display: flex;
+    opacity: 0;
+    max-height: 0;
+    flex-direction: row;
+    position: fixed;
+    padding-bottom: 40px;
+    right: 20px;
+    bottom: 19px;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.compareButton:hover + .product-cards{
+    opacity: 1;
+    border: 1px solid rgba(228, 227, 227, 0.603);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    max-height: 500px;
+    transition: opacity 1s ease-in-out;
+    transition-delay: 1s;
+}
+
+.product-card{
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.product-cards img{
+    height: 100px;
+    padding-inline:40px;
+    padding-bottom: 8px;
 }
 /* Media queries to make Responsive */
 @media (max-width:1366px){

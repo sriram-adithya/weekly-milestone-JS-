@@ -6,6 +6,20 @@ mainContainer.classList.add("container");
 //Append to a body of the document to render in webPage
 document.body.appendChild(mainContainer);
 
+// Counter for the "Add to Compare" functionality
+let compareCount = parseInt(sessionStorage.getItem("compareCount")) || 0;
+// Function to update the compare count in both UI and sessionStorage
+const updateCompareCount =() =>{
+  if(compareCount>=0){
+    sessionStorage.setItem("compareCount",compareCount);
+    compareButton.textContent=`compare(${compareCount})`;
+  }else{
+    compareCount=0;
+  }
+}
+const presentData =[];
+let selectedData =[];
+
 
 //looping through each product to get Product details
 productJSON.forEach(item => {
@@ -21,6 +35,7 @@ productJSON.forEach(item => {
   const exchangeOfferData = item.exchangeOfferDiscount.data;
   const bankOffersLink = item.bankOffersLink.buttonText;
   const productPageLink = item.productPageLink;
+  presentData.push({ title, imageUrl });
  
 
 //create div element for each item
@@ -45,7 +60,6 @@ img.height=item.image.height;
 itemDiv.appendChild(img);  
 
 //title and productPageLink 
-
 //This div is for title
 const description = document.createElement("div")
 description.classList.add("titleClass")
@@ -200,21 +214,140 @@ addToCart.appendChild(addToCartLabel);
 
 //Input tag for addToCompare
 const addToCompareCheckbox = document.createElement('input');
+addToCompareCheckbox.classList.add("compareCheckbox")
 addToCompareCheckbox.type = 'checkbox';
-addToCompareCheckbox.id = 'addToCompareCheckbox'; 
+addToCompareCheckbox.id = `addToCompareCheckbox_${compareCount}`; 
 addToCompareCheckbox.style.cursor="pointer";
 addToCompare.appendChild(addToCompareCheckbox);
-addToCompareCheckbox.addEventListener("click",function(event){
-  const compareButton = document.createElement("button");
-  compareButton.textContent ="Compare"
-  
-})
 
 //label tag for addToCompare
 const addToCompareLabel = document.createElement('label');
 addToCompareLabel.classList.add("addToCompareLabel");
 addToCompareLabel.textContent = 'Add to Compare';
-addToCompareLabel.htmlFor = 'addToCompareCheckbox';
+addToCompareLabel.htmlFor = `addToCompareCheckbox_${compareCount}`;
 addToCompare.appendChild(addToCompareLabel);
 
-})
+// Add event listener for the "Add to Compare" checkbox
+addToCompareCheckbox.addEventListener("change", () => {
+  if (addToCompareCheckbox.checked) {
+    compareCount++;
+  } else {
+    compareCount = Math.max(0, compareCount - 1); 
+  }
+  updateCompareCount();
+});
+});
+
+//compare button 
+const compareButton = document.createElement("button");
+compareButton.classList.add("compareButton")
+mainContainer.appendChild(compareButton);
+compareButton.textContent= `COMPARE ${0}`;
+
+const productCardsDiv = document.createElement("div");
+productCardsDiv.classList.add("product-cards");
+
+mainContainer.appendChild(productCardsDiv);
+
+const showCompareButton = function () {
+  [item.title,item.image.url];
+};
+
+const checkBoxes = document.querySelectorAll(".compareCheckbox");
+// handle checkbox state change
+function handleCheckboxChange (event,index){
+const checkBox= event.target;
+
+if(checkBox.checked){
+  selectedData.push({ ...presentData[index],index });
+}else{
+  selectedData = selectedData.filter((data) => data.index !=index);
+}
+
+updateCompareButton();
+}
+// update the compare button state
+function updateCompareButton() {
+  if (selectedData.length > 0) {
+    compareButton.classList.add("show");
+    productJSON.forEach((item) => {
+      // Create a div element for each product
+      const productCardDiv = document.createElement("div")
+      productCardDiv.classList.add("product-card");
+
+      // Add product details to the card
+      const title = document.createElement("h6");
+      const cardImg = document.createElement("img");
+
+      title.textContent = item.title;
+      productCardDiv.appendChild(title);
+
+      cardImg.src = item.image.url;
+
+      productCardDiv.appendChild(cardImg);
+
+      productCardsDiv.appendChild(productCardDiv);
+    });
+  } else {
+    compareButton.classList.remove("show");
+  }
+
+  compareButton.textContent = `COMPARE ${selectedData.length}`;
+}
+
+// Add event listener to each checkbox
+checkBoxes.forEach((checkbox, index) => {
+  checkbox.addEventListener("change", (e) =>
+   handleCheckboxChange(e, index));
+});
+
+// Function to handle checkbox state change
+function handleCheckboxChange(event, index) {
+  const checkbox = event.target;
+
+  if (checkbox.checked) {
+    selectedData.push({ ...presentData[index], index });
+    // Create a div element for each product card
+    const productCardDiv = document.createElement("div");
+    productCardDiv.classList.add("product-card");
+    productCardDiv.dataset.index = index;
+
+    // product card details
+    const title = document.createElement("h6");
+    const cardImg = document.createElement("img");
+
+    title.textContent = presentData[index].title;
+    title.style.fontWeight = 400;
+    cardImg.src = presentData[index].imageUrl;
+
+    productCardDiv.appendChild(cardImg);
+    productCardDiv.appendChild(title);
+
+    productCardsDiv.appendChild(productCardDiv);
+  } else {
+    selectedData = selectedData.filter((data) => data.index !== index);
+    // Remove the product card from the main container
+    const cardToRemove = document.querySelector(
+      `.product-card[data-index="${index}"]`
+    );
+    if (cardToRemove) {
+      productCardsDiv.removeChild(cardToRemove);
+    }
+  }
+
+  updateCompareButton();
+}
+
+// Function to update the compare button state
+function updateCompareButton() {
+  if (selectedData.length > 0) {
+    compareButton.classList.add("show");
+  } else {
+    compareButton.classList.remove("show");
+  }
+
+  compareButton.textContent = `COMPARE ${selectedData.length}`;
+}
+
+
+
