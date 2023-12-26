@@ -126,7 +126,7 @@ itemDiv.appendChild(priceContainer);
 //This h4 is for Final Price and need to add Rs symbol in styling
 const price = document.createElement("h3");
 price.classList.add("price");
-price.textContent = "Rs. "+finalPrice;
+price.textContent = "₹ "+finalPrice;
 priceContainer.appendChild(price)
 
 //Create span for discounts
@@ -135,11 +135,14 @@ discount.classList.add('discount')
 discount.textContent = " " +discountData + "% " +" Off"
 discount.style.color ="#388e3c";
 
-//this p tag is for maxPrice which need to dash out in styling
+//this p tag is for maxPrice and Strike tag to dash out the price
 const maxPrice = document.createElement("p");
+const strikePrice = document.createElement("strike")
+strikePrice.classList.add("strikePrice");
+strikePrice.textContent="₹ "+ mrp;
+maxPrice.appendChild(strikePrice);
 maxPrice.classList.add("max-price")
 
-maxPrice.textContent = "Rs. "+ mrp;
 //Append discound to maxPrice
 maxPrice.appendChild(discount);
 //Append maxPrice to priceContainer

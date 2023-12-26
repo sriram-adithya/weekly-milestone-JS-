@@ -2,7 +2,7 @@
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
-    font-family: Arial,sans-serif;
+    font-family: 'Roboto', sans-serif; 
 }
 nav{
     background-color: #2874f0;
@@ -10,7 +10,6 @@ nav{
     justify-content: center;
     align-items: center;
     padding: 10px 0px;
-    position: relative;
 }
 .plus-color{
     color: orange;
@@ -23,7 +22,7 @@ nav{
     top: -5px;
     font-size: 11px;
 }
-.searchbar{
+.searchBar{
     background-color: white;
     padding: 8px;
     width: 420px;
@@ -35,7 +34,7 @@ nav{
     box-shadow: -7px -7px 10px rgb(0,0,0,0.1),
     7px 7px 10px rgb(0,0,0,0.1);
 }
-.searchbar input{
+.searchBar input{
     width: 380px;
     border: none;
     outline: none;
@@ -55,7 +54,7 @@ nav{
      box-shadow: -7px -7px 10px rgb(0,0,0,0.1),
     7px 7px 10px rgb(0,0,0,0.1); 
 }
-.navlink{
+.navLink{
     margin: 0 35px;
     font-size: 18px;
     color: white;
@@ -148,7 +147,7 @@ input[type='checkbox'] {
 .footerMain{
     display: flex;
     padding: 40px 78px 70px 65px;
-    gap: 140px;
+    gap: 95px;
 }
 h4{
     padding-bottom: 10px;
@@ -181,21 +180,18 @@ padding-left: 24px;
 border-left: 1px solid #474D5D;
 height: 140px;
 font-size: 12px;
-font-weight: 500;
 line-height: 18px;
-width: 235px;
+width: 210px;
 }
 .footer-column:nth-child(6) {
 font-size: 12px;
 font-weight: 400;
 line-height: 18px; 
 width: 212px;
-} 
-
+}
 .footerBottom{
     display: flex;
     flex-direction: row;
-    gap: 80px;
     border-top: 1px solid #454d5e ;
     padding: 25px 0px 25px 0;
     align-items: center;
@@ -281,5 +277,3 @@ width: 212px;
         margin-left: 50px;
     }
 }
-
-
